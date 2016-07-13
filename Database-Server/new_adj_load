@@ -1,0 +1,16 @@
+cat ~/smes_load/adjustments/newly_completed.txt | while read adjustment
+do 
+	cd ~/smes_load/adjustments
+	echo $adjustment
+	echo $adjustment-GNSS
+	echo perl uncert2psql.pl $adjustment-GNSS
+	echo perl prep_psql.pl
+	perl prep_psql.pl
+	perl uncert2psql.pl $adjustment-GNSS
+	perl uncert2psql.pl $adjustment-FULL
+	perl meas2db.pl $adjustment-FULL
+	sed -i '8i<DnaMeasurement></DnaMeasurement>' $adjustment-FULLmsr.xml
+	perl msr_parse_all.pl $adjustment-FULL
+	cd ~/smes_load
+	sh scn_msr_load
+done
