@@ -1,0 +1,80 @@
+cd /home/geoserver/smes_load/
+java -jar sqlcl/lib/oracle.sqldeveloper.sqlcl.jar rsmes4/LASSIsmes4@//10.61.89.88/LVTXNPRD @smes_download.sql
+#psql -U postgres -h localhost -p 5433 -d geo -f smes_tables.sql
+psql -U postgres -h localhost -p 5433 -d geo -f smes_varying_tables.sql
+
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate  smes.mark_description cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.creation_dates;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.proj_comments cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.msr_geodetic cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.adjustment, smes.measurement_adj, smes.msr_comments cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.msr_gnss_datum cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.mark_status cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.name_type cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.msr_category cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.adjustment_type, smes.msr_type, smes.parish cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.datum, smes.msr_gnss_scaling cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.v_order, smes.v_class, smes.v_tech, smes.h_order, smes.h_class, smes.h_tech cascade;"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate smes.map_point;"
+psql -U postgres -h localhost -p 5433 -d geo -c "ALTER TABLE smes.map_point DROP COLUMN geom CASCADE;"
+psql -U postgres -h localhost -p 5433 -d geo -c "DROP TABLE smes.creation_dates_full cascade"
+psql -U postgres -h localhost -p 5433 -d geo -c "truncate TABLE scn.isolated_gnss_adj_current cascade"
+
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_status from '/home/geoserver/smes_load/mark_status.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.adjustment_type from '/home/geoserver/smes_load/adjustment_type.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.datum from '/home/geoserver/smes_load/datum.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.h_class from '/home/geoserver/smes_load/h_class.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.h_order from '/home/geoserver/smes_load/h_order.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.h_tech from '/home/geoserver/smes_load/h_tech.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.v_class from '/home/geoserver/smes_load/v_class.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.v_order from '/home/geoserver/smes_load/v_order.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.v_tech from '/home/geoserver/smes_load/v_tech.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_type from '/home/geoserver/smes_load/msr_type.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.name_type from '/home/geoserver/smes_load/name_type.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.parish from '/home/geoserver/smes_load/parish.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_category from '/home/geoserver/smes_load/msr_category.csv' DELIMITER ',' CSV HEADER;"
+
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_description from '/home/geoserver/smes_load/mark_description.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.adjustment from '/home/geoserver/smes_load/adjustment.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.comments  from '/home/geoserver/smes_load/comments.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.creation_dates from '/home/geoserver/smes_load/creation_dates.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_coordinates from '/home/geoserver/smes_load/mark_coordinates.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_horizontal  from '/home/geoserver/smes_load/mark_horizontal.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_measurements from '/home/geoserver/smes_load/mark_measurements.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_name from '/home/geoserver/smes_load/mark_name.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_uncertainty  from '/home/geoserver/smes_load/mark_uncertainty.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.mark_vertical   from '/home/geoserver/smes_load/mark_vertical.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.measurement_adj   from '/home/geoserver/smes_load/measurement_adj.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.measurement_adj_files  from '/home/geoserver/smes_load/measurement_adj_files.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_comments  from '/home/geoserver/smes_load/msr_comments.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_geodetic  from '/home/geoserver/smes_load/msr_geodetic.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.proj_comments  from '/home/geoserver/smes_load/proj_comments.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_project  from '/home/geoserver/smes_load/msr_project.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_angle  from '/home/geoserver/smes_load/msr_angle.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_coordinate  from '/home/geoserver/smes_load/msr_coordinate.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_direction  from '/home/geoserver/smes_load/msr_direction.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_direction_set  from '/home/geoserver/smes_load/msr_direction_set.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_distance  from '/home/geoserver/smes_load/msr_distance.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_gnss_baseline  from '/home/geoserver/smes_load/msr_gnss_baseline.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_gnss_covariance  from '/home/geoserver/smes_load/msr_gnss_covariance.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_gnss_datum from '/home/geoserver/smes_load/msr_gnss_datum.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_gnss_point  from '/home/geoserver/smes_load/msr_gnss_point.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_gnss_scaling  from '/home/geoserver/smes_load/msr_gnss_scaling.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_height  from '/home/geoserver/smes_load/msr_height.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.msr_height_difference  from '/home/geoserver/smes_load/msr_height_difference.csv' DELIMITER ',' CSV HEADER;"
+psql -U postgres -h localhost -p 5433 -d geo -c "copy smes.map_point  from '/home/geoserver/smes_load/map_point.csv' DELIMITER ',' CSV HEADER;"
+
+psql -U postgres -h localhost -p 5433 -d geo -f smes_create_geom.sql
+psql -U postgres -h localhost -p 5433 -d geo -f smes_derived_tables.sql
+
+
+
+echo "Nightly Replication Completed: $(date)" >> mybackup.log
+rm *.csv
+ssh dave@10.1.37.181 'source ~/.bash_profile;cd ~/dynanet;sh run_vicall_new_msr.sh' uname -a 
+
+sh new_adj_load
+
+psql -U postgres -h localhost -p 5433 -d geo -f smes_post_adj_tables.sql
+
+psql -U postgres -h localhost -p 5433 -d geo -c "vacuum FULL;"
