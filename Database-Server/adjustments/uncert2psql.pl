@@ -14,15 +14,15 @@ my $FINAL;
 my $ninefig; my $lat; my $lon; my $UncertH; my $UncertV; my $semiMajor; my $semiMinor; my $Orientation; my $xx; my $xy; my $xz; my $yy; my $yz; my $zz;
 my $decimal_xx;
 
-#Connect to Database		
-my $driver   = "Pg"; 
+#Connect to Database
+my $driver   = "Pg";
 my $database = "geo";
 my $dsn = "DBI:$driver:dbname=$database;host=localhost;port=5433";
 my $userid = "dave";
-my $password = "dave";
-my $dbh = DBI->connect($dsn, $userid, $password, { RaiseError => 1 ,AutoCommit => 0}) 
+my $password = "xxxxxx";
+my $dbh = DBI->connect($dsn, $userid, $password, { RaiseError => 1 ,AutoCommit => 0})
                       or die $DBI::errstr;
-					  
+
 print "Opened database successfully\n";
 
 #open(APU,"<victoria_160203.phased-mt.apu") || die "Cannot open log file $APU\n";
@@ -39,8 +39,8 @@ while(<APU>)
   $_ =~ s/\n                                                                                                                                       /   /gm;
 
   print OUT $_;
-  }  
-  
+  }
+
   };
   close OUT;
    open (FINAL, ">uncert_final.txt");
@@ -68,4 +68,4 @@ $dbh->do('INSERT INTO "scn"."uncert" (nine_fig, pos_uncertainty, xx,xy,xz,yy,yz,
   print "Uncertainties written to database successfully\n";
 
 
- 
+

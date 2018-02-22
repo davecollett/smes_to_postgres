@@ -40,11 +40,9 @@ dnaadjust vicscnadj/$FULL --multi --output-adj-msr --sort-adj-m 7 --output-pos -
 
 sed -i '8i<DnaMeasurement></DnaMeasurement>' $FULLMSR
 
-curl -T vicscnadj/$FULL.phased-mt.adj ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$FULL.phased-mt.apu ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$FULL.phased-mt.xyz ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$FULLMSR ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$FULLSTN ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
+#curl to push to DB servers go here..
+
+
 
 rm vicscnadj/$FULL*
 
@@ -65,10 +63,7 @@ dnasegment vicscnadj/$GNSS --min 400 --max 450
 echo "dnaadjust vicscnadj/$GNSS --multi --output-adj-msr --sort-adj-m 7 --output-pos --output-cor --stn-coord-types "PLhHENz" --hz-corr 0.2 --export-xml --output-msr-to-stn"
 dnaadjust vicscnadj/$GNSS --multi --output-adj-msr --sort-adj-m 7 --output-pos --output-cor --stn-coord-types "PLhHENz" --hz-corr 0.2 --export-xml --output-msr-to-stn
 
-curl -T vicscnadj/$GNSS.phased-mt.adj ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$GNSS.phased-mt.apu ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T vicscnadj/$GNSS.phased-mt.xyz ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-
+#curl to push to DB servers go here..
 rm vicscnadj/$GNSS*
 
 
@@ -79,7 +74,4 @@ echo $FILENAME>>completed.txt
 
 fi
 done
-curl -T import/$STN ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T import/$MSR ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
-curl -T import/$CONTROL ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver 
-curl -T newly_completed.txt ftp://10.192.241.33/smes_load/adjustments/ -u geoserver:geoserver
+#curl to push to DB servers go here..

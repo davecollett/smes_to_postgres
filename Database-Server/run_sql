@@ -1,5 +1,5 @@
 cd /home/geoserver/smes_load/
-java -jar sqlcl/lib/oracle.sqldeveloper.sqlcl.jar rsmes4/LASSIsmes4@//10.61.89.88/LVTXNPRD @smes_download.sql
+java -jar sqlcl/lib/oracle.sqldeveloper.sqlcl.jar (Connection details) @smes_download.sql
 #psql -U postgres -h localhost -p 5433 -d geo -f smes_tables.sql
 psql -U postgres -h localhost -p 5433 -d geo -f smes_varying_tables.sql
 
@@ -71,7 +71,7 @@ psql -U postgres -h localhost -p 5433 -d geo -f smes_derived_tables.sql
 
 echo "Nightly Replication Completed: $(date)" >> mybackup.log
 rm *.csv
-ssh dave@10.1.37.181 'source ~/.bash_profile;cd ~/dynanet;sh run_vicall_new_msr.sh' uname -a 
+SSH to DNA server and run adjustment
 
 sh new_adj_load
 
