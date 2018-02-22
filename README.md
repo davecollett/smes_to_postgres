@@ -9,9 +9,9 @@ Connection to a PostGIS database requires a database.ini file to be included in 
 ```
 [postgresql]
 host=geodetic01
-port=5433
+port=5432
 database=geo
-user=dave
-password=dave
+user=user
+password=xxxxx
 ```
 
