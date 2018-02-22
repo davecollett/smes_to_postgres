@@ -1,0 +1,5 @@
+D_TYPE,D_DESCRIPTION,D_CODE,VISIBLE,DEFAULT_DATUM
+H,Australian Geodetic Datum 1966,AGD66,N,N
+H,Geocentric Datum of Australia 1994,GDA94,Y,N
+V,Australian Height Datum,AHD  ,N,N
+H,Geocentric Datum of Australia 2020,GDA2020,Y,Y
