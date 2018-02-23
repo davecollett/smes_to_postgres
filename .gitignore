@@ -2,3 +2,7 @@ gda2020v1.3_2017.208/
 database.ini
 __pycache__/
 *.py[cod]
+mark_coordinates_gda2020.csv
+mark_description.csv
+mark_horizontal_gda2020.csv
+mark_name.csv
