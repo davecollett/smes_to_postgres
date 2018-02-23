@@ -6,7 +6,7 @@ from collections import namedtuple
 import datetime
 import psycopg2
 from config import config
-import test_connect
+import db_connect
 
 print(datetime.datetime.now())
 
@@ -39,7 +39,7 @@ df_apu = df_apu[df_apu.mark_name.notnull()]
 df_new = pd.merge(df_xyz, df_apu, on='mark_name')
 #print(df_new)
 
-test_connect.create_db()
+db_connect.create_db()
 
 #Bring in the mark_id's via nine_fig
 #df_full = pd.merge(df_new, df_nf, how='inner', left_on='mark_name', right_on='NINE_FIG')
@@ -95,7 +95,7 @@ with open('mark_coordinates_gda2020.csv', 'w' , newline='') as csv_mrk_crd, open
      todb_mrk_horiz2.append(todb_mrk_horiz,)
      todb_mrk_coord2.append(todb_mrk_coord,)
      #print(todb_mrk_name)
-     #test_connect.insert_mark_name(todb_mrk_name)
+     #db_connect.insert_mark_name(todb_mrk_name)
 
      #print(towrite_mrk_crd)
 
@@ -110,10 +110,10 @@ with open('mark_coordinates_gda2020.csv', 'w' , newline='') as csv_mrk_crd, open
      mark_id += 1
      mark_name_id += 1
 #print(todb_mrk_name2)
-test_connect.insert_mark_description(todb_mrk_desc2)
-test_connect.insert_mark_name(todb_mrk_name2)
-test_connect.insert_mark_horiz(todb_mrk_horiz2)
-test_connect.insert_mark_coord(todb_mrk_coord2)
+db_connect.insert_mark_description(todb_mrk_desc2)
+db_connect.insert_mark_name(todb_mrk_name2)
+db_connect.insert_mark_horiz(todb_mrk_horiz2)
+db_connect.insert_mark_coord(todb_mrk_coord2)
 
-#test_connect.commit()
+#db_connect.commit()
 print(datetime.datetime.now())
