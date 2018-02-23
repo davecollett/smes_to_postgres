@@ -83,14 +83,14 @@ with open('mark_coordinates_gda2020.csv', 'w' , newline='') as csv_mrk_crd, open
      #towrite_mrk_hz = [mrk_h_id, mark_id,  h_d_code,'3', 'ADJ','ORG', "{0:.3f}".format(row.easting), "{0:.3f}".format(row.northing),zone_rnd, h_date_edit, h_date_adj,"{0:.3f}".format(row.hz_posu)]
      #towrite_mrk_crd = [mrk_crd_id, mark_id, "{0:.9f}".format(row.latitude_x) , "{0:.9f}".format(row.longitude_x), "{0:.3f}".format(row.ellip), "{0:.3f}".format(row.easting) , "{0:.3f}".format(row.northing) , zone_rnd, 'ADJ', 'OSGV', h_date_edit, '3', 'X', 'GDA2020', adj_id,"{0:.3f}".format(row.hz_posu) ]
      #towrite_mrk_name = [mark_name_id, mark_id, row.mark_name,'P']
-     towrite_mrk_desc = [mark_id]
+     #towrite_mrk_desc = [mark_id]
 
      todb_mrk_desc = (mark_id,)
      todb_mrk_name = (str(mark_name_id), str(mark_id), str(row.mark_name),'P',)
      todb_mrk_horiz = (mrk_h_id, mark_id,  h_d_code,'3', 'ADJ','ORG', "{0:.3f}".format(row.easting), "{0:.3f}".format(row.northing),zone_rnd, h_date_edit, h_date_adj,"{0:.3f}".format(row.hz_posu),)
      todb_mrk_coord = (mrk_crd_id, mark_id, "{0:.9f}".format(row.latitude_x) , "{0:.9f}".format(row.longitude_x), "{0:.3f}".format(row.ellip), "{0:.3f}".format(row.easting) , "{0:.3f}".format(row.northing) , zone_rnd, 'ADJ', 'OSGV', h_date_edit, '3', 'X', 'GDA2020', adj_id,"{0:.3f}".format(row.hz_posu))
 
-     todb_mrk_desc2.append(towrite_mrk_desc,)
+     todb_mrk_desc2.append(todb_mrk_desc,)
      todb_mrk_name2.append(todb_mrk_name,)
      todb_mrk_horiz2.append(todb_mrk_horiz,)
      todb_mrk_coord2.append(todb_mrk_coord,)

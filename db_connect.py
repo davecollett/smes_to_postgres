@@ -159,7 +159,15 @@ def create_db():
             next(f)  # Skip the header row.
             cur.copy_from(f, 'nadj.name_type', sep=',')
 
+        with open("DB Tables/Static/h_order.csv", 'r') as f:
+            # Notice that we don't need the `csv` module.
+            next(f)  # Skip the header row.
+            cur.copy_from(f, 'nadj.h_order', sep=',', columns=('H_ORDER','H_ORDER_TXT'))
 
+        with open("DB Tables/Static/h_tech.csv", 'r') as f:
+            # Notice that we don't need the `csv` module.
+            next(f)  # Skip the header row.
+            cur.copy_from(f, 'nadj.h_tech', sep=',', columns=('H_TECH','H_TECH_TXT'))
 
 
         cur.execute(sql_insert)
